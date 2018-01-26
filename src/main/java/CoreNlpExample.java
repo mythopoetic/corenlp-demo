@@ -16,6 +16,8 @@ public class CoreNlpExample {
         DependencyParser dp = DependencyParser.loadFromModelFile(modelPath);
         Scanner sc = new Scanner(System.in);
 
+        BotTest testBot = new BotTest();
+
         //Add annotators for SUTime
         pipeline.addAnnotator(new TimeAnnotator("sutime", props));
 
@@ -28,8 +30,10 @@ public class CoreNlpExample {
             if(text.equalsIgnoreCase("q")){
                 break;
             }
-            AnalyzeText analyze = new AnalyzeText(pipeline, text, dp);
-            analyze.analyze();
+            //AnalyzeText analyze = new AnalyzeText(pipeline, text, dp); <-- original code
+            //analyze.analyze(); <-- original code
+
+            testBot.analyzeInput(pipeline, text);
         }
     }
 }
