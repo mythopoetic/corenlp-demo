@@ -111,8 +111,6 @@ public class AnalyzeText {
         String date = dateFormat.format(new Date());
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         String time = timeFormat.format(new Date());
-        System.out.println("Current date: " + date);
-        System.out.println("Current time: " + time);
         document.set(CoreAnnotations.DocDateAnnotation.class, date+"T"+time);
 
         pipeline.annotate(document);
