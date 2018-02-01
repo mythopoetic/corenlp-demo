@@ -30,7 +30,6 @@ public class BotTest {
 
                 String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
                 String word = token.get(CoreAnnotations.TextAnnotation.class);
-                System.out.println("POS: " + pos + " " + word);
 
                 if (pos.equalsIgnoreCase("vb")) {
                     verbList.add(word);

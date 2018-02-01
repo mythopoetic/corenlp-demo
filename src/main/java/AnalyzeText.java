@@ -6,6 +6,7 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.parser.nndep.DependencyParser;
 import edu.stanford.nlp.pipeline.*;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
+import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.time.TimeAnnotations;
 import edu.stanford.nlp.time.TimeExpression;
 import edu.stanford.nlp.trees.GrammaticalStructure;
@@ -22,7 +23,7 @@ public class AnalyzeText {
     private Properties props;
     private DependencyParser dp;
 
-    public AnalyzeText (StanfordCoreNLP pipeline, String text, DependencyParser dp){
+    public AnalyzeText(StanfordCoreNLP pipeline, String text, DependencyParser dp) {
         this.pipeline = pipeline;
         this.text = text;
         this.dp = dp;
@@ -111,7 +112,7 @@ public class AnalyzeText {
         String date = dateFormat.format(new Date());
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         String time = timeFormat.format(new Date());
-        document.set(CoreAnnotations.DocDateAnnotation.class, date+"T"+time);
+        document.set(CoreAnnotations.DocDateAnnotation.class, date + "T" + time);
 
         pipeline.annotate(document);
 
@@ -124,5 +125,17 @@ public class AnalyzeText {
             System.out.println(cm.get(TimeExpression.Annotation.class).getTemporal());
         }
         System.out.println("---");
+    }
+
+    public void analyzeSwedish(String text) {
+
+        MaxentTagger maxentTagger = new MaxentTagger("C:/Users/E603772/Desktop/stanford-corenlp-full-2017-06-09/swedish.tagger");
+        String tag = maxentTagger.tagString(text);
+        String[] eachTag = tag.split("\\s+");
+        System.out.println("Word      " + "Standford tag");
+        System.out.println("----------------------------------");
+        for(int i = 0; i< eachTag.length; i++) {
+            System.out.println(eachTag[i].split("_")[0] +"           "+ eachTag[i].split("_")[1]);
+        }
     }
 }
